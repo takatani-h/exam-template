@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>{{科目名}} {{試験名}} 模範解答</title>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']]
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap');
+
+    @page {
+      size: A4;
+      margin: 20mm;
+      @top-left    { content: none; }
+      @top-center  { content: none; }
+      @top-right   { content: none; }
+      @bottom-left { content: none; }
+      @bottom-center {
+        content: "- " counter(page) " -";
+        font-size: 9pt;
+        font-family: serif;
+      }
+      @bottom-right { content: none; }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Noto Serif JP", "Noto Serif CJK JP", serif;
+      font-size: 10.5pt;
+      line-height: 1.75;
+      color: #000;
+      width: 170mm;
+      padding: 0;
+      margin: 20mm auto;
+    }
+
+    @media print {
+      body {
+        margin: 0;
+        width: 100%;
+      }
+    }
+
+    h1 {
+      font-size: 13pt;
+      font-weight: bold;
+      padding-bottom: 5px;
+      border-bottom: 2px solid #000;
+      margin-bottom: 0.4em;
+    }
+
+    .meta {
+      font-size: 9.5pt;
+      color: #333;
+      margin-top: 0.2em;
+    }
+
+    h2 {
+      font-size: 11.5pt;
+      font-weight: bold;
+      padding-bottom: 2px;
+      border-bottom: 1.5px solid #000;
+      margin-top: 1.4em;
+      margin-bottom: 0.5em;
+    }
+
+    h3 {
+      font-size: 10.5pt;
+      font-weight: bold;
+      margin-top: 0.9em;
+      margin-bottom: 0.2em;
+    }
+
+    p {
+      margin: 0.25em 0;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #bbb;
+      margin: 1.2em 0;
+    }
+
+    .dm {
+      margin: 0.4em 0;
+      page-break-inside: avoid;
+    }
+
+    mjx-container {
+      page-break-inside: avoid;
+    }
+  </style>
+</head>
+<body>
+
+<!--
+  ============================================================
+  模範解答テンプレート (自己完結 / 科目非依存)
+  使い方:
+    1. {{...}} を科目ごとの値に置き換える。
+    2. <h2> 大問 → <h3> 小問 → .dm 数式 の入れ子で書く。
+    3. 最終的な答えは \boxed{...} で囲む。
+       数値は有効数字3ケタの指数表記 ($X.YZ \times 10^{W}$)。
+  md からの変換規約は GUIDE.md を参照。
+  ============================================================
+-->
+
+<h1>{{科目名}} {{試験名}} 模範解答</h1>
+<p class="meta">{{年度}}</p>
+
+<hr>
+
+<!-- ===== 大問ブロック (ここから問題数だけ複製する) ===== -->
+<h2>問1 [{{大問配点}}点]</h2>
+
+<!-- 与条件のまとめ (任意) -->
+<p>{{与条件: m = ... など}}</p>
+
+<h3>(1) {{小問の見出し}}</h3>
+<!-- 途中式や説明文は <p> で。式は .dm で別行立てにする -->
+<p>{{必要なら説明文}}</p>
+<div class="dm">$$
+{{途中式}} = \boxed{ {{最終解}} \text{ {{単位}}}}
+$$</div>
+
+<h3>(2) {{小問の見出し}}</h3>
+<div class="dm">$$
+{{途中式}} = \boxed{ {{最終解}} \text{ {{単位}}}}
+$$</div>
+
+<hr>
+<!-- ===== 大問ブロックここまで ===== -->
+
+</body>
+</html>

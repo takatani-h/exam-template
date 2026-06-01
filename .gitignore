@@ -1,0 +1,5 @@
+# WSL / Windows
+*:Zone.Identifier
+
+# macOS
+.DS_Store

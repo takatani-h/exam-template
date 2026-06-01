@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>{{科目名}} {{試験名}}</title>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']]
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap');
+
+    @page {
+      size: A4;
+      margin: 20mm;
+      @top-left    { content: none; }
+      @top-center  { content: none; }
+      @top-right   { content: none; }
+      @bottom-left { content: none; }
+      @bottom-center {
+        content: "- " counter(page) " -";
+        font-size: 9pt;
+        font-family: serif;
+      }
+      @bottom-right { content: none; }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Noto Serif JP", "Noto Serif CJK JP", serif;
+      font-size: 10.5pt;
+      line-height: 1.75;
+      color: #000;
+      width: 170mm;
+      padding: 0;
+      margin: 20mm auto;
+    }
+
+    @media print {
+      body {
+        margin: 0;
+        width: 100%;
+      }
+    }
+
+    .exam-header {
+      border: 1.5px solid #000;
+      padding: 6px 10px;
+      margin-bottom: 0.8em;
+    }
+
+    .exam-title {
+      font-size: 13pt;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 4px;
+    }
+
+    .exam-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 9.5pt;
+    }
+
+
+    .notes {
+      background: #f5f5f5;
+      border-left: 3px solid #555;
+      padding: 5px 10px;
+      margin-bottom: 1em;
+      font-size: 9.5pt;
+    }
+
+    .notes-title {
+      font-weight: bold;
+      margin-bottom: 2px;
+    }
+
+    .notes ul {
+      padding-left: 1.5em;
+      margin: 0;
+    }
+
+    .notes li { margin: 1px 0; }
+
+    .notes .sub-list {
+      padding-left: 1.5em;
+      list-style-type: none;
+    }
+
+    h2 {
+      font-size: 11.5pt;
+      font-weight: bold;
+      padding-bottom: 2px;
+      border-bottom: 1.5px solid #000;
+      margin-top: 1.4em;
+      margin-bottom: 0.5em;
+    }
+
+    p { margin: 0.25em 0; }
+
+    .q-intro { margin-bottom: 0.4em; text-indent: 1rem; }
+
+    .q-item { margin: 0.6em 0; }
+
+    .figure {
+      text-align: center;
+      margin: 0.6em 0;
+      page-break-inside: avoid;
+    }
+
+    .figure img {
+      max-width: 50%;
+      max-height: 60mm;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #bbb;
+      margin: 1.2em 0;
+    }
+
+    .dm {
+      margin: 0.4em 0;
+      page-break-inside: avoid;
+    }
+
+    mjx-container { page-break-inside: avoid; }
+  </style>
+</head>
+<body>
+
+<!--
+  ============================================================
+  問題用紙テンプレート (自己完結 / 科目非依存)
+  使い方:
+    1. {{...}} を科目ごとの値に置き換える。
+    2. 「問ブロック」を問題数だけ複製する。
+    3. 部品 (.q-intro / .q-item / .figure / .dm) を必要に応じて使う。
+       下の「部品カタログ」コメントを参照。
+  md からの変換規約は GUIDE.md を参照。
+  ============================================================
+-->
+
+<div class="exam-header">
+  <div class="exam-title">{{科目名}} {{試験名}}</div>
+  <div class="exam-info">
+    <span>{{年度}}</span>
+    <span>試験時間: {{試験時間}}　／　配点: {{配点}}</span>
+  </div>
+</div>
+
+<div class="notes">
+  <div class="notes-title">注意事項</div>
+  <ul>
+    <li>数字の解答は有効数字3ケタの指数表記 ($X.YZ \times 10^{W}$) で答えなさい。
+      <ul class="sub-list">
+        <li>$12345 \Rightarrow 1.23 \times 10^4$</li>
+        <li>$-0.9896 \Rightarrow -9.90 \times 10^{-1}$</li>
+        <li>$3 \Rightarrow 3.00 \times 10^0$</li>
+      </ul>
+    </li>
+    <li>単位は問題文で指示されているものを使いなさい。解答欄に記入はしなくてよい。</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ===== 問ブロック (ここから問題数だけ複製する) ===== -->
+<h2>問1 [{{大問配点}}点]</h2>
+
+<p class="q-intro">{{リード文: 共通の前提・与条件をここに書く}} [各{{小問配点}}点]</p>
+
+<p class="q-item"><strong>(1)</strong> {{小問の問題文}}</p>
+
+<p class="q-item"><strong>(2)</strong> {{小問の問題文}}</p>
+
+<hr>
+<!-- ===== 問ブロックここまで ===== -->
+
+<!--
+  ============================================================
+  部品カタログ (必要な行を問ブロック内にコピーして使う)
+  ------------------------------------------------------------
+  図を入れる:
+      <div class="figure">
+        <img src="./assets/FILE.png" alt="図の説明">
+      </div>
+
+  別行立ての数式 (与条件・式など。$$ は式と別行に置く):
+      <div class="dm">$$
+      m = 2.0 \text{ kg}, \quad k = 100 \text{ N/m}
+      $$</div>
+
+  A4 で印刷したとき、問が次ページにまたぐのを防ぐ調整:
+      <div style="height: 2rem;"></div>
+  ============================================================
+-->
+
+</body>
+</html>
