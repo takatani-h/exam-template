@@ -153,6 +153,47 @@
       width: 100%;
       min-height: 30mm;
     }
+
+    /* 文字マス目 (コード記述欄): 1文字1マス。罫線は border で印刷確実 */
+    .ans-code-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.3em;
+      flex: 1;
+    }
+
+    .ans-code {
+      display: grid;
+      grid-template-columns: repeat(24, 6mm); /* 列数。コード幅に応じて変える */
+      grid-auto-rows: 6mm;                    /* 1マスの高さ */
+      width: max-content;
+      border-top: 1px solid #000;
+      border-left: 1px solid #000;
+    }
+
+    .ans-code .cell {
+      border-right: 1px solid #000;
+      border-bottom: 1px solid #000;
+    }
+
+    /* 横罫線欄 (コード・記述向け): 横線のみ。罫線は border で印刷確実 */
+    .ans-lined-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.3em;
+      flex: 1;
+    }
+
+    .ans-lined {
+      width: 100%;
+      border: 1px solid #000;
+      border-bottom: none; /* 最下行の .line の border-bottom が枠の下辺になる */
+    }
+
+    .ans-lined .line {
+      height: 8mm;          /* 1 行の高さ */
+      border-bottom: 1px solid #000;
+    }
   </style>
 </head>
 <body>
@@ -166,14 +207,16 @@
     3. 各大問の最初の行だけ <span class="q-major">問N</span> を書き、
        2行目以降は空の <span class="q-major"></span> にする。
 
-  解答欄は問題の形式に合わせて3種類から選ぶ (下に問1〜問3の例):
+  解答欄は問題の形式に合わせて5種類から選ぶ (下に問1〜問5の例):
     A. 指数表記   .ans-wrap   … 仮数 × 10^指数 のマス目 (数値計算問題)
     B. 選択・記号 .ans-choice … 記号を1つ書く小さめの枠 (選択問題)
     C. 自由記述   .ans-free   … 文章・計算過程・作図などの大きな枠
+    D. 文字マス目 .ans-code   … 1文字1マスのグリッド (コード記述)
+    E. 横罫線     .ans-lined  … 横線のみの罫線欄 (コード・記述)
 
   A と B は 1 行 (.ans-row) に小問 (.ans-item) を最大2つ並べる。
   小問が奇数で余ったら、空の <div class="ans-item"></div> で埋める。
-  C は幅が広いので 1 行 1 小問。
+  C・D・E は幅が広いので 1 行 1 小問。
   ============================================================
 -->
 
@@ -239,6 +282,55 @@
   <div class="ans-row">
     <span class="q-major"></span>
     <div class="ans-free-item"><span class="q-minor">(2)</span><div class="ans-free" style="min-height: 45mm;"></div></div>
+  </div>
+</div>
+
+<!-- ===== D. 文字マス目 (コード記述): 1文字1マス。1 行 1 小問 ===== -->
+<!-- インデントはマス数でそろう。列数は .ans-code の grid-template-columns、
+     行数は .cell の個数で決まる。下は 24 列 × 12 行 -->
+<div class="section">
+  <div class="ans-row">
+    <span class="q-major">問4</span>
+    <div class="ans-code-item">
+      <span class="q-minor">(1)</span>
+      <div class="ans-code">
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== E. 横罫線 (コード・記述): 横線のみ。1 行 1 小問 ===== -->
+<!-- 行数は .line の個数、行高は .line の height で決まる。下は 10 行 -->
+<div class="section">
+  <div class="ans-row">
+    <span class="q-major">問5</span>
+    <div class="ans-lined-item">
+      <span class="q-minor">(1)</span>
+      <div class="ans-lined">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+    </div>
   </div>
 </div>
 <!-- ===== 大問ブロックここまで (問の数だけ複製) ===== -->
