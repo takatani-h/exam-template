@@ -10,6 +10,9 @@
 2. 固まった md を **html** (`question.html` / `answer.html` /
    `answer_sheet.html`) に変換する。html は A4 印刷用の清書。
 3. 内容修正は md を直してから html に反映する。
+4. 試験事務提出用の **試験情報シート** は `information.md` (正本) を埋めてから
+   `information.html` (様式に寄せた清書) に反映し、A4 で印刷する。
+   詳細は `GUIDE.md`。
 
 ## 守ること
 
